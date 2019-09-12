@@ -107,7 +107,7 @@ seir <- function(t,R0,a,alpha,mu,v_ei,v_ir,sigma2,rho,phi,G,X){
     gamma_ID = rgamma(1,shape = 1/sigma2,scale = sigma2)
     
     S_out = v_se * gamma_SE + mu * gamma_SD
-    prob_se = v_se * gamma_SE/  Sout * (1-exp(-S_out))
+    prob_se = v_se * gamma_SE/  S_out * (1-exp(-S_out))
     prob_sd = mu * gamma_SD/ S_out * (1-exp(-S_out))
     dN_se = rbinom(1, S, prob_se)
     dN.sd= ifelse(S-dN_se==0,0,rbinom(1, S-dN_se, prob_sd/(exp(-S_out)+prob_sd)))
@@ -239,7 +239,7 @@ lines(sapply(1:M, function(m) median(X[m,,8])),col=2,lty=1)
 lines(sapply(1:M, function(m) quantile(X[m,,8],0.1)),col=3,lty=2)
 lines(sapply(1:M, function(m) quantile(X[m,,8],0.9)),col=3,lty=2)
 lines(X.true[,,8],type='l',col=4,lty=1)
-legend("topleft", bty="n",legend=c("","Median",'10%,90% quantile',"True I"),col=c(1,2,3,4), lty=c(1,1,2,1), cex=0.7)
+legend("topleft", bty="n",legend=c("Mean","Median",'10%,90% quantile',"True I"),col=c(1,2,3,4), lty=c(1,1,2,1), cex=0.7)
 
 plot(rowMeans(X[,,9]),xlim=c(0,140),ylim = c(0,25000),type = 'l',main = 'London',xlab = 'Times(Biweek)',ylab='BiWeekly Recovered')
 lines(sapply(1:M, function(m) median(X[m,,9])),col=2,lty=1)
